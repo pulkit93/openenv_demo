@@ -1,0 +1,36 @@
+name: number-guessing-game
+version: "1.0.0"
+description: |
+  Number Guessing Game with 3 difficulty levels (easy/medium/hard).
+  Supports typed actions/observations and agent graders.
+  Fully compliant with Meta OpenEnv Hackathon rules.
+
+environment:
+  class: server.environment.NumberGuessingEnvironment
+  module: server.environment
+
+tasks:
+  - name: easy
+    description: Guess between 1-50 (15 attempts)
+    params: { "difficulty": "easy" }
+  - name: medium
+    description: Guess between 1-100 (10 attempts)
+    params: { "difficulty": "medium" }
+  - name: hard
+    description: Guess between 1-200 (7 attempts)
+    params: { "difficulty": "hard" }
+
+action_space:
+  type: NumberGuessAction
+  fields:
+    guess: int
+
+observation_space:
+  type: NumberGuessObservation
+  fields:
+    feedback: str
+    attempts_remaining: int
+    message: str
+    progress_score: float
+    final_grade: Optional[float]
+Python
